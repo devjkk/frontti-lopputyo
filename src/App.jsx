@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import initStore from "./utils/initStore";
+import ListNotes from "./comps/ListNotes";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
     <h1>Hello</h1>
+    <ListNotes />
     </>
   )
 }
