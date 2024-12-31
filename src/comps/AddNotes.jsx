@@ -47,30 +47,48 @@ function AddNotes() {
     }
 
     return (
-        <>
-        <div>
-            <CourseSelector 
-              selectedCourse={selectedCourse}
-              onChange={handleCourseChange}
-              disabled={locked}
-            />
-            <button onClick={handleReset}>reset</button>
-        </div>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6">Add a New Note</h2>
+            <div className="flex flex-col gap-4 w-full max-w-md">
+                <CourseSelector 
+                  selectedCourse={selectedCourse}
+                  onChange={handleCourseChange}
+                  disabled={locked}
+                  className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none"
+                />
+                <button 
+                  onClick={handleReset}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-md shadow hover:bg-gray-700"
+                >
+                  Reset
+                </button>
 
-        <div>
-            <textarea
-              value={noteText}
-              onChange={(e) => setNoteText(e.target.value)}
-             />
-             <button onClick={handleSave} disabled={selectedCourse === "" || noteText === ""}>save</button>
-        </div>
+                <textarea
+                  value={noteText}
+                  onChange={(e) => setNoteText(e.target.value)}
+                  placeholder="Enter your note here..."
+                  className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+                  rows="4"
+                />
+                <button
+                  onClick={handleSave}
+                  disabled={selectedCourse === "" || noteText === ""}
+                  className="px-6 py-2 bg-green-600 text-white rounded-md shadow hover:bg-green-700 disabled:opacity-50"
+                >
+                  Save
+                </button>
+            </div>
 
-        <ul>
-            {sessionNotes.map((note, i) => {
-                return <li key={i}>{note}</li>
-            })}
-        </ul>
-        </>
+            <ul className="mt-6 space-y-2">
+                {sessionNotes.map((note, i) => {
+                    return (
+                        <li key={i} className="p-4 bg-white border rounded-md shadow">
+                            {note}
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
     )
 }
 
