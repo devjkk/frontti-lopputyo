@@ -9,12 +9,14 @@ const initStore = async () => {
             fetchJson(`${API}/notes`)
         ]);
 
-        const maxId = notes.length > 0 ? Math.max(...notes.map(note => note.id)) : 0;
+        const maxNoteId = notes.length > 0 ? Math.max(...notes.map(note => note.id)) : 0;
+        const maxCourseId = courses.length > 0 ? Math.max(...courses.map(course => course.id)) : 0
 
         useStore.setState({
             courses: courses,
             notes: notes,
-            nextNoteId: maxId + 1
+            nextNoteId: maxNoteId + 1,
+            nextCourseId: maxCourseId + 1
         });
 
         console.log(courses);
