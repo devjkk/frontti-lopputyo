@@ -16,7 +16,7 @@ function ListNotes() {
         <div>
             <CourseSelector
                 selectedCourse={selectedCourse} 
-                callback={handleCourseChange}
+                onChange={handleCourseChange}
             />
 
             <ul>
