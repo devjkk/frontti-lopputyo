@@ -18,6 +18,8 @@ const useStore = create((set) => ({
             nextNoteId: state.nextNoteId+1
         })
     }),
+
+    removeNote: (id) => set((state) => ({ notes: state.notes.filter((note) => note.id !== id) })),
 }));
 
 export default useStore;
