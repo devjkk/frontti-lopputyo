@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+import initStore from "./utils/initStore";
+
 function App() {
+
+  useEffect(() => {
+    initStore();
+  }, []);
 
   return (
     <>
