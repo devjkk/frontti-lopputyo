@@ -64,59 +64,80 @@ function AddNotes() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">Add a New Note</h2>
-            <div className="flex flex-col gap-4 w-full max-w-md">
-                {error && (
-                    <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                        {error}
+        <div className="min-h-screen bg-gray-900 text-gray-100 px-4 py-8 md:px-8">
+            <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-gray-100 mb-8 text-center">Add Note</h2>
+                
+                <div className="bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200">
+                            {error}
+                        </div>
+                    )}
+                    
+                    <div className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-2">
+                                Select Course
+                            </label>
+                            <CourseSelector 
+                                selectedCourse={selectedCourse}
+                                onChange={handleCourseChange}
+                                disabled={locked}
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-100 disabled:opacity-50"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-2">
+                                Note Text
+                            </label>
+                            <textarea
+                                value={noteText}
+                                onChange={(e) => {
+                                    setNoteText(e.target.value);
+                                    setError("");
+                                }}
+                                placeholder="Enter your note here..."
+                                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-100 min-h-[120px]"
+                                rows="4"
+                            />
+                        </div>
+
+                        <div className="flex gap-4">
+                            <button
+                                onClick={handleSave}
+                                disabled={selectedCourse === "" || noteText.trim() === ""}
+                                className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-lg transition-colors duration-200"
+                            >
+                                Save Note
+                            </button>
+                            <button 
+                                onClick={handleReset}
+                                className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {sessionNotes.length > 0 && (
+                    <div className="bg-gray-800 rounded-lg shadow-lg p-6">
+                        <h3 className="text-xl font-semibold text-gray-200 mb-4">Session Notes</h3>
+                        <div className="space-y-3">
+                            {sessionNotes.map((note, i) => (
+                                <div 
+                                    key={i} 
+                                    className="p-4 bg-gray-700 rounded-lg border border-gray-600"
+                                >
+                                    {note}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
-                
-                <CourseSelector 
-                    selectedCourse={selectedCourse}
-                    onChange={handleCourseChange}
-                    disabled={locked}
-                    className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none"
-                />
-                <button 
-                    onClick={handleReset}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-md shadow hover:bg-gray-700"
-                >
-                    Reset
-                </button>
-
-                <textarea
-                    value={noteText}
-                    onChange={(e) => {
-                        setNoteText(e.target.value);
-                        setError("");
-                    }}
-                    placeholder="Enter your note here..."
-                    className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400"
-                    rows="4"
-                />
-                <button
-                    onClick={handleSave}
-                    disabled={selectedCourse === "" || noteText.trim() === ""}
-                    className="px-6 py-2 bg-green-600 text-white rounded-md shadow hover:bg-green-700 disabled:opacity-50"
-                >
-                    Save
-                </button>
             </div>
-
-            {sessionNotes.length > 0 && (
-                <div className="mt-6">
-                    <h3 className="text-lg font-medium text-gray-700 mb-3">Session Notes</h3>
-                    <ul className="space-y-2">
-                        {sessionNotes.map((note, i) => (
-                            <li key={i} className="p-4 bg-white border rounded-md shadow">
-                                {note}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
         </div>
     )
 }

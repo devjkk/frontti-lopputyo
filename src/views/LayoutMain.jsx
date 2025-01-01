@@ -1,52 +1,49 @@
 import { Link, Outlet } from "react-router-dom";
 
-function MainLayout() {
+function LayoutMain() {
     return (
-        <div className="flex flex-col min-h-screen bg-gray-100">
-            {/* Header */}
-            <header className="bg-blue-600 text-white py-4">
-                <div className="container mx-auto flex justify-between items-center px-4">
-                    <h1 className="text-2xl font-bold">Notes Management App</h1>
-                    <nav className="flex gap-4">
-                        <Link
-                            to="/"
-                            className="hover:text-gray-200 transition"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            to="/add-courses"
-                            className="hover:text-gray-200 transition"
-                        >
-                            Add Courses
-                        </Link>
-                        <Link
-                            to="/add-notes"
-                            className="hover:text-gray-200 transition"
-                        >
-                            Add Notes
-                        </Link>
-                        <Link
-                            to="/list-notes"
-                            className="hover:text-gray-200 transition"
-                        >
-                            List Notes
-                        </Link>
-                    </nav>
+        <div className="min-h-screen bg-gray-900">
+            <nav className="bg-gray-800 border-b border-gray-700">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        <div className="flex items-center">
+                            <Link to="/" className="text-xl font-bold text-gray-100 hover:text-blue-400 transition-colors">
+                                Notes App
+                            </Link>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <Link 
+                                to="/add-courses" 
+                                className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                            >
+                                Add Course
+                            </Link>
+                            <Link 
+                                to="/add-notes" 
+                                className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                            >
+                                Add Note
+                            </Link>
+                            <Link 
+                                to="/list-notes" 
+                                className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                            >
+                                List Notes
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-            </header>
+            </nav>
 
-            {/* Main Content */}
-            <main className="flex-grow container mx-auto py-8 px-4">
-                <Outlet /> {/* Render child components */}
+            <main>
+                <Outlet />
             </main>
 
-            {/* Footer */}
-            <footer className="bg-gray-800 text-white text-center py-4">
-                <p>© {new Date().getFullYear()} Notes Management App</p>
+            <footer className="bg-gray-800 text-gray-300 text-center py-4">
+                <p> {new Date().getFullYear()} Notes Management App</p>
             </footer>
         </div>
     );
 }
 
-export default MainLayout;
+export default LayoutMain;
