@@ -2,6 +2,8 @@ import useStore from '../store/useStore';
 import fetchJson from '../utils/fetchJson';
 
 const initStore = async () => {
+    useStore.setState({ isLoading: true, error: null });
+    
     try {
         const API = "https://luentomuistiinpano-api.netlify.app/.netlify/functions"; 
         const [courses, notes] = await Promise.all([
@@ -13,17 +15,19 @@ const initStore = async () => {
         const maxCourseId = courses.length > 0 ? Math.max(...courses.map(course => course.id)) : 0
 
         useStore.setState({
-            courses: courses,
-            notes: notes,
+            courses,
+            notes,
             nextNoteId: maxNoteId + 1,
-            nextCourseId: maxCourseId + 1
+            nextCourseId: maxCourseId + 1,
+            isLoading: false,
+            error: null
         });
-
-        console.log(courses);
-        console.log(notes);
     } catch (err) {
-        // TODO: handle error, set error state
-        console.log(err);
+        useStore.setState({ 
+            isLoading: false, 
+            error: "Failed to load data. Please refresh the page or try again later." 
+        });
+        console.error("Failed to initialize store:", err);
     }
 };
 

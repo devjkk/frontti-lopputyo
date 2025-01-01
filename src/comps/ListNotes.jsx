@@ -4,7 +4,7 @@ import useStore from "../store/useStore";
 
 function ListNotes() {
     const [selectedCourse, setSelectedCourse] = useState("all");
-    const notes = useStore((state) => state.notes); 
+    const notes = useStore((state) => state.notes);
     const removeNote = useStore((state) => state.removeNote);
 
     const handleCourseChange = (id) => {
@@ -15,7 +15,9 @@ function ListNotes() {
         removeNote(id);
     }
 
-    const filteredNotes = selectedCourse == "all" ? notes : notes.filter((note) => note.course.id == selectedCourse);
+    const filteredNotes = selectedCourse === "all" ? 
+        notes : 
+        notes.filter((note) => note.course.id == selectedCourse);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -38,10 +40,10 @@ function ListNotes() {
                                     {note.timestamp}
                                 </p>
                                 <button 
-                                  onClick={() => handleRemove(note.id)} 
-                                  className="px-4 py-1 bg-red-600 text-white rounded-md shadow hover:bg-red-700"
+                                    onClick={() => handleRemove(note.id)} 
+                                    className="px-4 py-1 bg-red-600 text-white rounded-md shadow hover:bg-red-700"
                                 >
-                                  Remove
+                                    Remove
                                 </button>
                             </li>
                         )
