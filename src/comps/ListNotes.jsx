@@ -36,7 +36,7 @@ function ListNotes() {
                         return (
                             <li key={note.id} className="p-4 bg-white border rounded-md shadow">
                                 <p className="mb-2">
-                                    <strong>{note.text}</strong> (Course: {note.course.name}) -{" "}
+                                    <strong>{note.text}</strong> ({note.course.name}, id: {note.course.id}){" "}
                                     {note.timestamp}
                                 </p>
                                 <button 
